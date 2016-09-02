@@ -47,5 +47,5 @@ float4 main( PFXVertToPix IN ) : TORQUE_TARGET0
                                    fogData.y, 
                                    fogData.z );
 
-   return hdrEncode( float4( fogColor.rgb, 1.0 - saturate( factor ) ) );     
+   return hdrEncode( float4( toLinear(fogColor.rgb), 1.0 - saturate( factor ) ) );        
 }

@@ -62,6 +62,7 @@ singleton PostEffect( FogPostFx )
    
    renderPriority = 5;
    
+   targetFormat = "GFXFormatR16G16B16A16F";
    isEnabled = true;
 };
 
