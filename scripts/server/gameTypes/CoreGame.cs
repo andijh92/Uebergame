@@ -861,6 +861,24 @@ function CoreGame::createPlayer(%game, %client, %spawnPoint, %respawn, %team)
          allowClimb = true;
          allowTeleport = true;
          };
+
+           case "Mage":
+		 %player = new AiPlayer()
+		 {
+         dataBlock = MagePlayerData;
+         class = "BadBot";
+         client = %client;
+         team = %client.team;
+         isBot = true;
+         mMoveTolerance = 0.10;
+         allowWalk = true;
+         allowJump = true;
+         allowDrop = true;
+         allowSwim = true;
+         allowLedge = true;
+         allowClimb = true;
+         allowTeleport = true;
+         };
 		 
 	   default:
 		 %player = new AiPlayer()
@@ -899,11 +917,20 @@ function CoreGame::createPlayer(%game, %client, %spawnPoint, %respawn, %team)
            team = %client.team;
            isBot = false;
          };
-		 
+              
 	   case "Paintball":
 		 %player = new Player() 
 		 {
            dataBlock = PaintballPlayerData;
+           client = %client;
+           team = %client.team;
+           isBot = false;
+         };
+              
+	   case "Mage":
+		 %player = new Player() 
+		 {
+           dataBlock = MagePlayerData;
            client = %client;
            team = %client.team;
            isBot = false;
@@ -992,20 +1019,32 @@ function CoreGame::createPlayer(%game, %client, %spawnPoint, %respawn, %team)
 	 }
 	 //use slot 0 since this is our first weapon
 	 %player.use( %player.weaponSlot[0] );
+         
+    case "Mage": 
+       //check if soldier did not equip a primary weapon and give Lurker Wand as a default then
+       if ( %player.weaponSlot[0] $= "" )
+          {
+             %player.setInventory( LurkerWand, 1, 1 );
+             %player.setInventory( LurkerWandClip, %player.maxInventory(LurkerWandClip), 1 );
+             %player.setInventory( LurkerWandAmmo, %player.maxInventory(LurkerWandAmmo), 1 );
+             %player.weaponCount++;
+          }
+       //use slot 1 for the DefaultPlayerData, since his main weapon is on slot 1 instead of 0, since he has a pistol also
+       %player.use( %player.weaponSlot[0] );
+     
+    case "DefaultPlayerData": 
+       //check if soldier did not equip a primary weapon and give Lurker Rifle as a default then
+       if ( %player.weaponSlot[1] $= "" )
+          {
+             %player.setInventory( Lurker, 1, 1 );
+             %player.setInventory( LurkerClip, %player.maxInventory(LurkerClip), 1 );
+             %player.setInventory( LurkerAmmo, %player.maxInventory(LurkerAmmo), 1 );
+             %player.weaponCount++;
+          }
+       //use slot 1 for the DefaultPlayerData, since his main weapon is on slot 1 instead of 0, since he has a pistol also
+       %player.use( %player.weaponSlot[1] );
 	 
-	 case "DefaultPlayerData": 
-	 //check if soldier did not equip a primary weapon and give Lurker Rifle as a default then
-	 if ( %player.weaponSlot[1] $= "" )
-	 {
-     %player.setInventory( Lurker, 1, 1 );
-     %player.setInventory( LurkerClip, %player.maxInventory(LurkerClip), 1 );
-     %player.setInventory( LurkerAmmo, %player.maxInventory(LurkerAmmo), 1 );
-     %player.weaponCount++;
-	 }
-	 //use slot 1 for the DefaultPlayerData, since his main weapon is on slot 1 instead of 0, since he has a pistol also
-	 %player.use( %player.weaponSlot[1] );
-	 
-	 default: %player.use( %player.weaponSlot[0] ); //all others start with weapon slot 0 as default
+    default: %player.use( %player.weaponSlot[0] ); //all others start with weapon slot 0 as default
     }
    }
    
@@ -1045,6 +1084,9 @@ function CoreGame::createPlayer(%game, %client, %spawnPoint, %respawn, %team)
          %player.use( %player.weaponSlot[1] );
          case "Paintball":
          %client.setBotFav(%client.getRandomLoadout2());
+         %player.use( %player.weaponSlot[0] );
+         case "Mage":
+         %client.setBotFav(%client.getRandomLoadout3());
          %player.use( %player.weaponSlot[0] );
          default:
          %client.setBotFav(%client.getRandomLoadout());
@@ -1178,7 +1220,15 @@ function CoreGame::onDeath(%game, %player, %client, %sourceObject, %sourceClient
          {
             %game.awardScoreKill(%sourceClient, %damageType);
             %game.awardScoreDeath(%client, %damageType);
-            messageAll( 'MsgDeath', '%1 was killed by %2\c2 [%3]', %client.playerName, %sourceClient.playerName, $DamageText[%damageType] );
+            switch$ ($gameMode)
+               {
+               case "MTDMGame":
+                  messageAll( 'MsgDeath', '%1 was transformed by %2\c2', %client.playerName, %sourceClient.playerName );
+               case "MTTDMGame":
+                  messageAll( 'MsgDeath', '%1 was transformed by %2\c2', %client.playerName, %sourceClient.playerName );
+               default:
+                  messageAll( 'MsgDeath', '%1 was killed by %2\c2 [%3]', %client.playerName, %sourceClient.playerName, $DamageText[%damageType] );
+               }
          }
 
          // Send silent message with player stats

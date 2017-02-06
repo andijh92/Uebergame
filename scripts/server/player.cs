@@ -957,6 +957,44 @@ datablock PlayerData(PaintballPlayerData : DefaultPlayerData)
    switchTargetProbability = 0.3;
 };
 
+
+datablock PlayerData(MagePlayerData : DefaultPlayerData)
+{
+   // stuff that transforms the default player into a mage.
+   shapeFile = "art/shapes/actors/paintball_player/paintball_player.dts";
+   shapeNameFP[0] = "";
+   boundingBox = "0.75 0.75 1.8";
+   crouchBoundingBox = "0.75 0.75 1.25";
+   renderFirstPerson = "1";
+   //fixes the head clipping, since the paintballer uses real first person
+   groundImpactMinSpeed    = "4.1";
+   groundImpactShakeFreq   = "3 3 3";
+   groundImpactShakeAmp    = "0.2 0.2 0.2";
+   groundImpactShakeDuration = "1";
+   groundImpactShakeFalloff = 10.0;
+   
+   maxInvRyder = "0";
+
+   //BadBot AI settings
+   VisionRange = 100;
+   VisionFov = 120;
+   findItemRange = 20;
+   targetObjectTypes = $TypeMasks::PlayerObjectType;
+   itemObjectTypes = $TypeMasks::itemObjectType;
+   // optimalRange["Ryder"] = 12;
+   // burstLength["Ryder"] = 100;
+   optimalRange["LurkerWand"] = 16;
+   burstLength["LurkerWand"] = 2000;
+   // optimalRange["Shotgun"] = 8;
+   // burstLength["Shotgun"] = 100;
+   // optimalRange["SniperRifle"] = 30;
+   // burstLength["SniperRifle"] = 2000;
+   // optimalRange["GrenadeLauncher"] = 25;
+   // burstLength["GrenadeLauncher"] = 2000;
+   rangeTolerance = 3;
+   switchTargetProbability = 0.3;
+};
+
 //-----------------------------------------------------------------------------
 // SMS
 //            |Datablock|     |$SMS::ArmorName|     |Index|
@@ -964,6 +1002,7 @@ datablock PlayerData(PaintballPlayerData : DefaultPlayerData)
 SmsInv.AddArmor( DefaultPlayerData, "Soldier", 0 );
 //SmsInv.AddArmor( BotDefaultPlayerData, "BotSoldier", 0 );
 SmsInv.AddArmor( PaintballPlayerData, "Paintballer", 0 );
+SmsInv.AddArmor( MagePlayerData, "Mage", 0 );
 //SmsInv.AddArmor( BotPaintballPlayerData, "BotPaintballer", 0 );
 
 //----------------------------------------------------------------------------

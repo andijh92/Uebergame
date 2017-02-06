@@ -1,0 +1,2 @@
+All fire_magic_spell* sounds are a modifications of https://www.freesound.org/people/qubodup/sounds/159725/ (last invokation on 2017-02-04), which are licenced with CC0.
+magic_reload.ogg is a modification of https://www.freesound.org/people/qubodup/sounds/219571/ and https://www.freesound.org/people/qubodup/sounds/219570/ (last invokation on 2017-02-04) ,which is licenced with CC0.

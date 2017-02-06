@@ -1,0 +1,1 @@
+lurkerWand.dts is a modification of http://opengameart.org/content/staffwand (last invocation on 2017-02-05), which is licenced with CC-BY 3.0.

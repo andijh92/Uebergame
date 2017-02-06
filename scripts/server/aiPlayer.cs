@@ -369,6 +369,8 @@ function AIPlayer::triggerFire(%player, %slot, %bool)
             %time = 500;
          case "Lurker":
             %time = 200;
+         case "LurkerWand":
+            %time = 200;
          case "Shotgun":
             %time = 1000;
          case "GrenadeLauncher":

@@ -289,6 +289,10 @@ function AIConnection::onConnect(%client, %name)
    %client.setBotFav( %client.getRandomLoadout2() );
       case "PBTDMGame":
    %client.setBotFav( %client.getRandomLoadout2() );
+      case "MTDMGame":
+   %client.setBotFav( %client.getRandomLoadout3() );
+      case "MTTDMGame":
+   %client.setBotFav( %client.getRandomLoadout3() );
       default:
    %client.setBotFav( %client.getRandomLoadout() );
    }
@@ -1129,8 +1133,15 @@ function AIClient::getRandomLoadout2(%this, %client, %gameType)
    return( $BotInventorySet2[%index] );
 }
 
+function AIClient::getRandomLoadout3(%this, %client, %gameType)
+{
+   %index = getRandom( 1, $BotInventoryIndex5 );
+   return( $BotInventorySet5[%index] );
+}
+
 $BotInventoryIndex = 0;
 $BotInventoryIndex2 = 0;
+$BotInventoryIndex5 = 0;
 
 //riflers
 $BotInventorySet[$BotInventoryIndex++] = "armor\tSoldier\tWeapon\tShotgun\tSpecial\tMunitions\tGrenade\tGrenade";
@@ -1149,7 +1160,6 @@ $BotInventorySet[$BotInventoryIndex++] = "armor\tSoldier\tWeapon\tGrenade Launch
 $BotInventorySet[$BotInventoryIndex++] = "armor\tSoldier\tWeapon\tSniper Rifle\tSpecial\tMunitions\tGrenade\tGrenade";
 $BotInventorySet[$BotInventoryIndex++] = "armor\tSoldier\tWeapon\tSniper Rifle\tSpecial\tMedical\tGrenade\tGrenade";
 
-
 //paintball loadouts
 $BotInventorySet2[$BotInventoryIndex2++] = "armor\tPaintballer\tWeapon\tBlue Marker\tSpecial\tEmpty\tGrenade\tEmpty";
 $BotInventorySet2[$BotInventoryIndex2++] = "armor\tPaintballer\tWeapon\tRed Marker\tSpecial\tEmpty\tGrenade\tEmpty";
@@ -1159,3 +1169,6 @@ $BotInventorySet2[$BotInventoryIndex2++] = "armor\tPaintballer\tWeapon\tYellow M
 $BotInventorySet3[$BotInventoryIndex3++] = "armor\tPaintballer\tWeapon\tBlue Marker\tSpecial\tEmpty\tGrenade\tEmpty";
 //team red
 $BotInventorySet4[$BotInventoryIndex4++] = "armor\tPaintballer\tWeapon\tRed Marker\tSpecial\tEmpty\tGrenade\tEmpty";
+
+//mage loadouts
+$BotInventorySet5[$BotInventoryIndex5++] = "armor\tMage\tWeapon\tLurker Wand\tSpecial\tEmpty\tEmpty\tEmpty";

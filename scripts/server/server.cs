@@ -229,6 +229,7 @@ function Torque::createServer(%this, %serverType, %level, %missionType)
    exec("./markers.cs");
    exec("./triggers.cs");
    exec("./player.cs");
+   exec("./deer.cs");
    exec("./aiClient.cs");
    exec("./aiPlayer.cs");
    exec("./environment.cs");
@@ -270,6 +271,7 @@ function Torque::createServer(%this, %serverType, %level, %missionType)
    exec("./radiusDamage.cs");
    exec("./weapons/ryder.cs");
    exec("./weapons/lurker.cs");
+   exec("./weapons/lurkerWand.cs");
    exec("./weapons/shotgun.cs");
    exec("./weapons/sniperRifle.cs");
    exec("./weapons/grenadeLauncher.cs");

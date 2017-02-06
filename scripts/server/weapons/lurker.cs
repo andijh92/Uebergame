@@ -177,6 +177,7 @@ datablock ParticleEmitterData(BulletDirtDustEmitter)
 //--------------------------------------------------------------------------
 // Shell ejected during reload.
 //-----------------------------------------------------------------------------
+
 datablock DebrisData(BulletShell)
 {
    shapeFile = "art/shapes/weapons/shared/RifleShell.dts";

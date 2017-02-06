@@ -48,17 +48,3 @@ datablock ParticleData(bloodBulletDirtSpray)
    times[2] = 1;
    inheritedVelFactor = "0.299413";
 };
-
-datablock ParticleEmitterData(bloodBulletDirtSprayEmitter)  
-{   
-   ejectionPeriodMS = "15";
-   periodVarianceMS = "10";
-   ejectionVelocity = "1";
-   velocityVariance = "1";
-   thetaMax = "180";
-   orientParticles = "1";
-   particles = "bloodBulletDirtSpray";
-   ambientFactor = "0.5";
-   blendStyle = "NORMAL";
-   softParticles = "0";     
-};  

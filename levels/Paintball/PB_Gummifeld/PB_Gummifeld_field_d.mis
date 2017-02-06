@@ -25,7 +25,7 @@ new SimGroup(MissionGroup) {
          desc0 = "Paintball Gummifeld - Teamplay Field D";
          enabled = "1";
          levelName = "PB_Gummifeld_field_d";
-         MissionTypes = "PBTDM";
+         MissionTypes = "PBTDM MTTDM";
    };
    new SkyBox(theSky) {
       Material = "sky_day_01_SkyMat";
